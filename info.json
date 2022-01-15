@@ -1,0 +1,9 @@
+{
+	"name": "dumpchest",
+	"version": "0.1.0",
+	"title": "Dump Chest",
+	"author": "Immow",
+	"factorio_version": "1.1",
+	"dependencies": ["base >= 1.1"],
+	"description": "Dumps your trash slot items in active provider chest near the player."
+}
