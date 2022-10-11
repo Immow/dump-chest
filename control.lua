@@ -1,22 +1,24 @@
-script.on_event(defines.events.on_player_changed_position,
-	function(event)
-		local player = game.get_player(event.player_index)
-		-- player.character_personal_logistic_requests_enabled = false
-		-- player.character_personal_logistic_requests_enabled = true
-		do_the_job(player)
-	end
-)
+local whitelist = {
+	["dump-logistic-chest-active-provider"] = true,
+	["dump-logistic-chest-storage"] = true,
+}
 
-function do_the_job(player)
+local function dumpInChests(player)
 	local px = player.position.x
 	local py = player.position.y
 	local trash_inventory = player.get_inventory(defines.inventory.character_trash)
 	if trash_inventory == nil then return end
-
-	local chests_entities = player.surface.find_entities_filtered({
+	
+	local chests_entities = player.surface.find_entities_filtered{
 		area = {{-10 + px, -10 + py}, {10 + px, 10 + py}},
-		name = "active-provider-dumpchest"
-	})
+		type = "logistic-container"
+	}
+
+	for k, entity in pairs(chests_entities) do
+		if not whitelist[entity.name] then chests_entities[k] = nil end
+	end
+
+	if #chests_entities == 0 then return end
 
 	local table_insert = table.insert
 	local table_remove = table.remove
@@ -46,3 +48,12 @@ function do_the_job(player)
 		end
 	end
 end
+
+script.on_event(defines.events.on_player_changed_position,
+	function(event)
+		local player = game.get_player(event.player_index)
+		if not player.character then return end
+		if not player.character_personal_logistic_requests_enabled then return end
+		dumpInChests(player)
+	end
+)
