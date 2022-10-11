@@ -1,6 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.2 - contributor: _CodeGreen
+Date: 2022-10-11
+  Bugfixes:
+    - Fixed a loop to account for possible nil values.
+    - Fixed a icons display issue.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.1 - contributor: _CodeGreen
 Date: 2022-10-11
+  Features:
+    - Added two entities instead of changing the vanilla chests.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0 - contributor: KRS
 Date: 2021-01-15

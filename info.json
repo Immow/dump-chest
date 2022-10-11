@@ -1,9 +1,9 @@
 {
 	"name": "dumpchest",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"title": "Dump Chest",
 	"author": "Immow",
 	"factorio_version": "1.1",
 	"dependencies": ["base >= 1.1"],
-	"description": "Two types of dump chests, active and storage. Your trash slots items will be transfered when in range.\nCan toggle on or off via Personal Logistics\n\nAdditional thanks to _CodeGreen for helping with Graphics and Code"
+	"description": "Two types of dump chests added, active and storage. Your trash slots items will be transferred  when in range.\nCan toggle on or off via Personal Logistics\n\nAdditional thanks to _CodeGreen for helping with Graphics and Code"
 }

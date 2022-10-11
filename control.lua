@@ -1,3 +1,9 @@
+script.on_init(
+	function ()
+		game.forces.player.reset_technology_effects()
+	end
+)
+
 local whitelist = {
 	["dump-logistic-chest-active-provider"] = true,
 	["dump-logistic-chest-storage"] = true,
@@ -8,6 +14,7 @@ local function dumpInChests(player)
 	local py = player.position.y
 	local trash_inventory = player.get_inventory(defines.inventory.character_trash)
 	if trash_inventory == nil then return end
+	if #trash_inventory == 0 then return end
 	
 	local chests_entities = player.surface.find_entities_filtered{
 		area = {{-10 + px, -10 + py}, {10 + px, 10 + py}},
@@ -31,8 +38,8 @@ local function dumpInChests(player)
 		end
 	end
 
-	for i = 1, #chests_entities do
-		local chest_inventory = chests_entities[i].get_inventory(defines.inventory.item_main)
+	for _, entity in pairs (chests_entities) do
+		local chest_inventory = entity.get_inventory(defines.inventory.item_main)
 		for j = #trash_to_clean, 1, -1 do
 			local trash_candidate = trash_to_clean[j]
 			if chest_inventory.can_insert(trash_candidate) then
