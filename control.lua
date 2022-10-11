@@ -1,6 +1,8 @@
 script.on_event(defines.events.on_player_changed_position,
 	function(event)
 		local player = game.get_player(event.player_index)
+		-- player.character_personal_logistic_requests_enabled = false
+		-- player.character_personal_logistic_requests_enabled = true
 		do_the_job(player)
 	end
 )
@@ -11,7 +13,10 @@ function do_the_job(player)
 	local trash_inventory = player.get_inventory(defines.inventory.character_trash)
 	if trash_inventory == nil then return end
 
-	local chests_entities = player.surface.find_entities_filtered({area = {{-10 + px, -10 + py}, {10 + px, 10 + py}}, name = "logistic-chest-active-provider"}) -- This can probably be rate limited but I don't know how :(
+	local chests_entities = player.surface.find_entities_filtered({
+		area = {{-10 + px, -10 + py}, {10 + px, 10 + py}},
+		name = "active-provider-dumpchest"
+	})
 
 	local table_insert = table.insert
 	local table_remove = table.remove
